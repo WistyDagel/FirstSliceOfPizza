@@ -4,52 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="./script.js"></script>
 </head>
 <body>
     <div id='pizza'>
-        <div id='main-class'>
-            <div id='prebuild-pizza'>
-                <div id='prebuilt-1'>
-                    prebuilt 1
-                    <div class="imageWrapper">
-                        <img class="overlayImage" src="/IMAGES/BasePizza.webp" />
-                        <img class="overlayImage" src="/IMAGES/Sausage-Left.webp" />
-                        <img class="overlayImage" src="/IMAGES/Sausage-Right.webp" />
-                    </div>
-                </div>
-                <div id='prebuilt-2'>
-                    prebuilt 2
-                </div>
-                <div id='prebuilt-3'>
-                    prebuilt 3
-                </div>
-                <div id='prebuilt-4'>
-                    prebuilt 4
-                </div>
-                <div id='prebuilt-5'>
-                    prebuilt 5
-                </div>
-            </div>
-            <div id='sizing-picker'>
-                sizing picker
-            </div>
-            <div id='pizza-builder'>
-                <div id='pizza-builder-canvas'>
-                    canvas
-                </div>
-                <div id='pizza-builder-topping-chooser'>
-                    topping chooser
-                </div>
-            </div>
+        <div class="navbar" id="dropdown">
+            <a class="navbar-title" href="index.html">Home</a>
+            <a href="#prebuild-pizza">Preset Pizzas</a>
+            <a href="#pizza-builder">Build your Own</a>
+            <a href="javascript:void(0);" class="icon" onclick="dropDownFunction()">
+              <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <h2>Crescent Pizzas</h2>
+        <h4>Home of the signature crescent shape cheese on every pizza!</h4>
+        <div class="flex-container">
             <div id='price'>
                 <div id='total-prices'>
-                    prices and stuff
+                    <h5>Current Total: $0.00</h5>
                 </div>
+            </div>
+            <div id='order'>
                 <div id='order-button'>
-                    order button
+                    <button class="orderbtn">Order Now</button>
                 </div>
             </div>
         </div>
+        <div class='flex-container'>
+            <div id="pizzaImage">
+                <div class="imageWrapper">
+                    <img id="img-large" class="overlayImage" src="./IMAGES/BasePizza.webp" />
+                    <img id="img-large" class="overlayImage" src="./IMAGES/Pepperoni-Left.webp" />
+                    <img id="img-large" class="overlayImage" src="./IMAGES/Sausage-Right.webp" />
+                </div>
+            </div>
+            <div id='sidebar'>
+                <div id='prebuild-pizza'>
+                    <div class="dropdown">
+                        <button class="dropbtn">Prebuilt Pizzas</button>
+                        <div class="dropdown-content">
+                            <a href="#">Pepperoni</a>
+                            <a href="#">Three Meat</a>
+                            <a href="#">Combination</a>
+                            <a href="#">BBQ Chicken</a>
+                            <a href="#">Hawaiian</a>
+                        </div>
+                    </div>
+                </div>
+                <div id='sizing-picker'>
+                    <div class="dropdown">
+                        <button class="dropbtn">Sizes</button>
+                        <div class="dropdown-content">
+                            <a href="#">Small</a>
+                            <a href="#">Medium</a>
+                            <a href="#">Large</a>
+                            <a href="#">X-Large</a>
+                        </div>
+                    </div>
+                </div>
+                <h3>Meats</h3>
+                <div id='meat-toppings'>
+                    <div class="dropdown">
+                        <button class="dropbtn">Toppings</button>
+                        <div class="dropdown-content">
+                            <a href="#">Canadian Bacon</a>
+                            <a href="#">Grilled Chicken</a>
+                            <a href="#">Sausage</a>
+                            <a href="#">Pepperoni</a>
+                        </div>
+                    </div>
+                </div>
+                <h3>Veggies</h3>
+                <div id='veggie-toppings'>
+                    <div class="dropdown">
+                        <button class="dropbtn">Toppings</button>
+                        <div class="dropdown-content">
+                          <a href="#">Black Olives</a>
+                          <a href="#">Green Peppers</a>
+                          <a href="#">Mushrooms</a>
+                          <a href="#">Onions</a>
+                          <a href="#">Pineapple</a>
+                          <a href="#">Roma Tomatoes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <!-- <div class="flex-container footer">
+            <h6>First Slice of Pizza - &copy; Thing No Video</h6>
+        </div> -->
     </div>
     <script src="main.js"></script>
 </body>
