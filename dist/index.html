@@ -40,52 +40,46 @@
                 </div>
             </div>
             <div id='sidebar'>
-                <div id='prebuild-pizza'>
-                    <div class="dropdown">
-                        <button class="dropbtn">Prebuilt Pizzas</button>
-                        <div class="dropdown-content" id="prebuilt-dropdown"></div>
-                    </div>
-                </div>
-                <div id='sizing-picker'>
-                    <div class="dropdown">
-                        <button class="dropbtn">Sizes</button>
-                        <div class="dropdown-content" id="size-dropdown"></div>
-                    </div>
-                </div>
+                <h3>Prebuilt Pizzas</h3>
+                <select onchange="prebuiltPizza()">
+                    <option value="Pepperoni">Pepperoni</option>
+                    <option value="ThreeMeat">Three Meat</option>
+                    <option value="Combination">Combination</option>
+                    <option value="BBQChicken">BBQ Chicken</option>
+                    <option value="Hawaiian">Hawaiian</option>
+                </select>
+                <h3>Sizes</h3>
+                <select onchange="selectSize()">
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                    <option value="X-Large">X-Large</option>
+                </select>
                 <h3>Meats</h3>
-                <div id='meat-toppings'>
-                    <div class="dropdown">
-                        <button class="dropbtn">Toppings</button>
-                        <div class="dropdown-content">
-                            <a href="#">Canadian Bacon</a>
-                            <a href="#">Grilled Chicken</a>
-                            <a href="#">Sausage</a>
-                            <a href="#">Pepperoni</a>
-                        </div>
-                    </div>
-                </div>
+                <select onchange="selectMeats()">
+                    <option value="CanadianBacon">Canadian Bacon</option>
+                    <option value="GrilledChicken">Grilled Chicken</option>
+                    <option value="Sausage">Sausage</option>
+                    <option value="Pepperoni">Pepperoni</option>
+                </select>
                 <h3>Veggies</h3>
-                <div id='veggie-toppings'>
-                    <div class="dropdown">
-                        <button class="dropbtn">Toppings</button>
-                        <div class="dropdown-content">
-                          <a href="#">Black Olives</a>
-                          <a href="#">Green Peppers</a>
-                          <a href="#">Mushrooms</a>
-                          <a href="#">Onions</a>
-                          <a href="#">Pineapple</a>
-                          <a href="#">Roma Tomatoes</a>
-                        </div>
-                    </div>
-                </div>
+                <select onchange="selectVeggies()">
+                    <option value="Black Olives">Black Olives</option>
+                    <option value="Green Peppers">Green Peppers</option>
+                    <option value="Mushrooms">Mushrooms</option>
+                    <option value="Onions">Onions</option>
+                    <option value="Pineapple">Pineapple</option>
+                    <option value="RomaTomatoes">Roma Tomatoes</option>
+                    <option value="Pepperoni">Pepperoni</option>
+                </select>
             </div>
         </div>
         <br />
         <br />
         <br />
-        <!-- <div class="flex-container footer">
+        <div class="flex-container footer">
             <h6>First Slice of Pizza - &copy; Thing No Video</h6>
-        </div> -->
+        </div>
     </div>
     <script src="main.js"></script>
 </body>
