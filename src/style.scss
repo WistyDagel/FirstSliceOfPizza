@@ -227,6 +227,27 @@ select option {
     flex: 1;
 }
 
+.selection_image {
+    width: 25px;
+    height: 25px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.selection_option {
+    display: none;
+    font-size: 12pt;
+    margin-top: 10px;
+    border: 1px solid $papa-green;
+}
+#selected_veg {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#selected_meat {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 //FOOTER 
 .footer {
     width: 100%;
