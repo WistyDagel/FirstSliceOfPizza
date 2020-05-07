@@ -4,6 +4,10 @@ import { data } from './data';
 
 // document.getElementById('pizza').innerHTML = pizza_app;
 
+
+// DEPRECATED
+// TODO: populate select, create json map
+
 // Code for dynamically constructing elements
 const anchor = (_innerHTML, _href = "#") => {
     let a = document.createElement('a');
