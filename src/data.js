@@ -1,54 +1,80 @@
 export let data = {
+    sizes: [
+        {"Small": "sm"},
+        {"Medium": "md"},
+        {"Large": "lg"},
+        {"Extra Large": "xl"}
+    ],
     prices: [
-        {"x-large": "$15.00"},
-        {"large": "$12.00"},
-        {"medium": "$9.00"},
-        {"x-large": "$15.00"},
+        {"sm": "$7.00"},
+        {"md": "$9.00"},
+        {"lg": "$12.00"},
+        {"xl": "$15.00"}
     ],
     prebuiltPizzas: [
         {"Pepperoni": {
             toppings: [
-                "Pepperoni"
+                {"Meat":[
+                    "Pepperoni"
+                ]}
             ]
         }},
         {"Three Meat": {
             toppings: [
-                "Pepperoni",
-                "Canadian Bacon",
-                "Sausage"
+                {"Meat":[
+                    "Pepperoni",
+                    "Canadian Bacon",
+                    "Sausage"
+                ]}
             ]
         }},
         {"Combination": {
             toppings: [
-                "Sausage",
-                "Mushroom",
-                "Green Peppers",
-                "Olives"
+                {"Meat":[
+                    "Sausage",
+                ]},
+                {"Veggies":[
+                    "Mushroom",
+                    "Green Peppers",
+                    "Olives"
+                ]}
             ]
         }},
         {"BBQ Chicken": {
             toppings: [
-                "Grilled Chicken",
-                "Onions"
+                {"Meat":[
+                    "Grilled Chicken",
+                ]},
+                {"Veggies":[
+                    "Onions"
+                ]}
             ]
         }},
         {"Hawaiian": {
             toppings: [
-                "Canadian Bacon",
-                "Pineapple"
+                {"Meat":[
+                    "Canadian Bacon"
+                ]},
+                {"Veggies":[
+                    "Pineapple"
+                ]}
             ]
         }}
     ],
     toppings: [
-        "Pepperoni",
-        "Canadian Bacon",
-        "Black Olives",
-        "Green Peppers",
-        "Grilled Chicken",
-        "Mushrooms",
-        "Onions",
-        "Pineapple",
-        "Roma Tomatoes",
-        "Sausage"
+        {"Meat":[
+            "Pepperoni",
+            "Canadian Bacon",
+            "Grilled Chicken",
+            "Sausage"
+        ]},
+        {"Veggies":[
+            "Black Olives",
+            "Green Peppers",
+            "Mushrooms",
+            "Onions",
+            "Pineapple",
+            "Roma Tomatoes",
+        ]}
     ]
 }
