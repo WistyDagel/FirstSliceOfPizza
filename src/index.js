@@ -24,9 +24,9 @@ const populateDropdown = (dropdown, pairs) => {
 // Code for pulling pre-built pizzas from data.js
 let dropdown = document.getElementById('prebuilt-dropdown');
 let prebuilt = data.prebuiltPizzas;
-populateDropdown(dropdown, prebuilt);
+// populateDropdown(dropdown, prebuilt);
 // ... sizes from data.js
 dropdown = document.getElementById('size-dropdown');
 let sizes = data.sizes;
-populateDropdown(dropdown, sizes);
+// populateDropdown(dropdown, sizes);
 // End
