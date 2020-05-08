@@ -11,86 +11,200 @@
     <div id='pizza'>
         <div class="navbar" id="dropdown">
             <a class="navbar-title" href="index.html">Home</a>
-            <a href="#prebuild-pizza">Preset Pizzas</a>
+            <a href="#prebuild-pizza">House Specialties</a>
             <a href="#pizza-builder">Build your Own</a>
             <a href="javascript:void(0);" class="icon" onclick="dropDownFunction()">
               <i class="fa fa-bars"></i>
             </a>
         </div>
-        <h2>Crescent Pizzas</h2>
-        <h4>Home of the signature crescent shape cheese on every pizza!</h4>
-        <div class="flex-container">
-            <div id='price'>
-                <div id='total-prices'>
-                    <h5>Current Total: $0.00</h5>
+        <div class="container">
+            <h2>Crescent Pizzas</h2>
+            <h4>Home of the signature crescent shape cheese on every pizza!</h4>
+            <div class="flex-container">
+                <div id='price'>
+                    <div id='total-prices'>
+                        <h5>Current Total: $0.00</h5>
+                    </div>
+                </div>
+                <div id='order'>
+                    <div id='order-button'>
+                        <button class="orderbtn">Order Now</button>
+                    </div>
                 </div>
             </div>
-            <div id='order'>
-                <div id='order-button'>
-                    <button class="orderbtn">Order Now</button>
+            <h2 id="prebuild-pizza">House Specialties</h2>
+                <div class="scrolling-wrapper">
+                    <div class="card small">
+                        <h5>Pepperoni</h5>
+                        <div class="imageWrapper">
+                            <img  class="overlayImage" src="./IMAGES/BasePizza.webp" />
+                            <div id="pizzaToppings">
+                                <img class="overlayImage" src="./IMAGES/Pepperoni-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Pepperoni-Right.webp" />
+                            </div>
+                        </div>
+                        <div id="cardButton">
+                            <select onchange="selectSize()">
+                                <option value="Small">Small</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Large">Large</option>
+                                <option value="X-Large">X-Large</option>
+                            </select>
+                            <br />
+                            <button class="orderbtn">Add to Cart</button>
+                        </div>
+                    </div>    
+                    <div class="card small">
+                        <h5>ThreeMeat</h5>
+                        <div class="imageWrapper">
+                            <img  class="overlayImage" src="./IMAGES/BasePizza.webp" />
+                            <div id="pizzaToppings">
+                                <img class="overlayImage" src="./IMAGES/Pepperoni-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Pepperoni-Right.webp" />
+                                <img class="overlayImage" src="./IMAGES/Canadian_Bacon-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Canadian_Bacon-Right.webp" />
+                                <img class="overlayImage" src="./IMAGES/Sausage-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Sausage-Right.webp" />
+                            </div>
+                        </div>
+                        <div id="cardButton">
+                            <select onchange="selectSize()">
+                                <option value="Small">Small</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Large">Large</option>
+                                <option value="X-Large">X-Large</option>
+                            </select>
+                            <br />
+                            <button class="orderbtn">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="card small">
+                        <h5>Combination</h5>
+                        <div class="imageWrapper">
+                            <img class="overlayImage" src="./IMAGES/BasePizza.webp" />
+                            <div id="pizzaToppings">
+                                <img class="overlayImage" src="./IMAGES/Sausage-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Sausage-Right.webp" />
+                                <img class="overlayImage" src="./IMAGES/Mushrooms-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Mushrooms-Right.webp" />
+                                <img class="overlayImage" src="./IMAGES/Green_Peppers-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Green_Peppers-Right.webp" />
+                                <img class="overlayImage" src="./IMAGES/Black_Olives-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Black_Olives-Right.webp" />
+                            </div>
+                        </div>
+                        <div id="cardButton">
+                            <select onchange="selectSize()">
+                                <option value="Small">Small</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Large">Large</option>
+                                <option value="X-Large">X-Large</option>
+                            </select>
+                            <br />
+                            <button class="orderbtn">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="card small">
+                        <h5>BBQChicken</h5>
+                        <div class="imageWrapper">
+                            <img  class="overlayImage" src="./IMAGES/BasePizza.webp" />
+                            <div id="pizzaToppings">
+                                <img class="overlayImage" src="./IMAGES/Grilled_Chicken-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Grilled_Chicken-Right.webp" />
+                                <img class="overlayImage" src="./IMAGES/Onions-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Onions-Right.webp" />
+                            </div>
+                        </div>
+                        <div id="cardButton">
+                            <select onchange="selectSize()">
+                                <option value="Small">Small</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Large">Large</option>
+                                <option value="X-Large">X-Large</option>
+                            </select>
+                            <br />
+                            <button class="orderbtn">Add to Cart</button>
+                        </div>
+                    </div>  
+                    <div class="card small">
+                        <h5>Hawaiian</h5>
+                        <div class="imageWrapper">
+                            <img  class="overlayImage" src="./IMAGES/BasePizza.webp" />
+                            <div id="pizzaToppings">
+                                <img class="overlayImage" src="./IMAGES/Canadian_Bacon-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Canadian_Bacon-Right.webp" />
+                                <img class="overlayImage" src="./IMAGES/Pineapple-Left.webp" />
+                                <img class="overlayImage" src="./IMAGES/Pineapple-Right.webp" />
+                            </div>
+                        </div>
+                        <div id="cardButton">
+                            <select onchange="selectSize()">
+                                <option value="Small">Small</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Large">Large</option>
+                                <option value="X-Large">X-Large</option>
+                            </select>
+                            <br />
+                            <button class="orderbtn">Add to Cart</button>
+                        </div>
+                    </div> 
+                </div>
+            <h2 id="pizza-builder">Build Your Own</h2>
+            <div class='flex-container'>
+                <div id="pizzaImage">
+                    <div class="imageWrapper">
+                        <img  class="overlayImage" src="./IMAGES/BasePizza.webp" />
+                        <div id="pizzaToppings">
+                            <img class="overlayImage" src="./IMAGES/Pepperoni-Left.webp" />
+                            <img class="overlayImage" src="./IMAGES/Sausage-Right.webp" />
+                        </div>
+                    </div>
+                </div>
+                <div id='sidebar'>
+                    <h3>Sizes</h3>
+                    <select onchange="selectSize()">
+                        <option value="Small">Small</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Large">Large</option>
+                        <option value="X-Large">X-Large</option>
+                    </select>
+                    <h3>Meats</h3>
+                    <select id='meat'>
+                        <option value="default" selected>Select a Meats</option>
+                        <option value="Canadian Bacon">Canadian Bacon</option>
+                        <option value="Grilled Chicken">Grilled Chicken</option>
+                        <option value="Sausage">Sausage</option>
+                        <option value="Pepperoni">Pepperoni</option>
+                    </select>
+                    <div class="selection_option" id='meat_selection'>
+                        <p id='selected_meat'></p>
+                        <img class='selection_image' id='meat_whole' src='./IMAGES/assets/whole.png' />
+                        <img class='selection_image' id='meat_right' src='./IMAGES/assets/right.png' />
+                        <img class='selection_image' id='meat_left' src='./IMAGES/assets/left.png' />
+                    </div>
+                    <h3>Veggies</h3>
+                    <select id='veg'>
+                        <option value="default" selected>Select a Veggies</option>
+                        <option value="Black Olives">Black Olives</option>
+                        <option value="Green Peppers">Green Peppers</option>
+                        <option value="Mushrooms">Mushrooms</option>
+                        <option value="Onions">Onions</option>
+                        <option value="Pineapple">Pineapple</option>
+                        <option value="Roma Tomatoes">Roma Tomatoes</option>
+                        <option value="Pepperoni">Pepperoni</option>
+                    </select>
+                    <div class="selection_option" id='veg_selection'>
+                        <p id='selected_veg'></p>
+                        <img class='selection_image' id='veg_whole' src='./IMAGES/assets/whole.png' />
+                        <img class='selection_image' id='veg_right' src='./IMAGES/assets/right.png' />
+                        <img class='selection_image' id='veg_left' src='./IMAGES/assets/left.png' />
+                    </div>
                 </div>
             </div>
+            <br />
+            <br />
+            <br />
         </div>
-        <div class='flex-container'>
-            <div id="pizzaImage">
-                <div class="imageWrapper">
-                    <img id="img-large" class="overlayImage" src="./IMAGES/BasePizza.webp" />
-                    <img id="img-large" class="overlayImage" src="./IMAGES/Pepperoni-Left.webp" />
-                    <img id="img-large" class="overlayImage" src="./IMAGES/Sausage-Right.webp" />
-                </div>
-            </div>
-            <div id='sidebar'>
-                <h3>Prebuilt Pizzas</h3>
-                <select onchange="prebuiltPizza()">
-                    <option value="Pepperoni">Pepperoni</option>
-                    <option value="ThreeMeat">Three Meat</option>
-                    <option value="Combination">Combination</option>
-                    <option value="BBQChicken">BBQ Chicken</option>
-                    <option value="Hawaiian">Hawaiian</option>
-                </select>
-                <h3>Sizes</h3>
-                <select onchange="selectSize()">
-                    <option value="Small">Small</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Large">Large</option>
-                    <option value="X-Large">X-Large</option>
-                </select>
-                <h3>Meats</h3>
-                <select id='meat'>
-                    <option value="default" selected>Select a Meats</option>
-                    <option value="Canadian Bacon">Canadian Bacon</option>
-                    <option value="Grilled Chicken">Grilled Chicken</option>
-                    <option value="Sausage">Sausage</option>
-                    <option value="Pepperoni">Pepperoni</option>
-                </select>
-                <div class="selection_option" id='meat_selection'>
-                    <p id='selected_meat'></p>
-                    <img class='selection_image' id='meat_whole' src='./IMAGES/assets/whole.png' />
-                    <img class='selection_image' id='meat_right' src='./IMAGES/assets/right.png' />
-                    <img class='selection_image' id='meat_left' src='./IMAGES/assets/left.png' />
-                </div>
-                <h3>Veggies</h3>
-                <select id='veg'>
-                    <option value="default" selected>Select a Veggies</option>
-                    <option value="Black Olives">Black Olives</option>
-                    <option value="Green Peppers">Green Peppers</option>
-                    <option value="Mushrooms">Mushrooms</option>
-                    <option value="Onions">Onions</option>
-                    <option value="Pineapple">Pineapple</option>
-                    <option value="Roma Tomatoes">Roma Tomatoes</option>
-                    <option value="Pepperoni">Pepperoni</option>
-                </select>
-                <div class="selection_option" id='veg_selection'>
-                    <p id='selected_veg'></p>
-                    <img class='selection_image' id='veg_whole' src='./IMAGES/assets/whole.png' />
-                    <img class='selection_image' id='veg_right' src='./IMAGES/assets/right.png' />
-                    <img class='selection_image' id='veg_left' src='./IMAGES/assets/left.png' />
-                </div>
-            </div>
-        </div>
-        <br />
-        <br />
-        <br />
         <div class="flex-container footer">
             <h6>First Slice of Pizza - &copy; Thing No Video</h6>
         </div>
