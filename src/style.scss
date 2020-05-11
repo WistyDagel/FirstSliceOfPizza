@@ -215,6 +215,8 @@ select option {
     width: 25%;
     height: 100%;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     &:hover{
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
