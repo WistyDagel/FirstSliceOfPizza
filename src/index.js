@@ -83,7 +83,7 @@ function comparesSelectedItemWithPizza(item) {
 
 function loopsThroughOverlayImages() {
     // Loops through the overlay image
-    let images = document.getElementsByClassName('overlayImage');
+    let images = document.getElementsByClassName('mainPizzaImage');
 
     let elements_list = [];
 
