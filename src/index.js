@@ -56,9 +56,9 @@ function selectOptions(evt) {
         }
 
         // Adds HOVER and CLICK events for images
-        document.getElementById(`${evt.target.id}_whole`).addEventListener('click', changeImage);
-        document.getElementById(`${evt.target.id}_right`).addEventListener('click', changeImage);
-        document.getElementById(`${evt.target.id}_left`).addEventListener('click', changeImage);
+        document.getElementById(`${evt.target.id}_whole`).addEventListener('click', changeSelectionImage);
+        document.getElementById(`${evt.target.id}_right`).addEventListener('click', changeSelectionImage);
+        document.getElementById(`${evt.target.id}_left`).addEventListener('click', changeSelectionImage);
     } else {
         document.getElementById(`${evt.target.id}_selection`).style.display = 'none';
     }
@@ -186,7 +186,7 @@ function deletesToppingFromPizza(topping_name, toppings_container, side_of_pizza
     }
 }
 
-function changeImage(evt) {
+function changeSelectionImage(evt) {
     if (/whole/.test(evt.target.src)) {
         
         if (/whole_active.png/.test(evt.target.src)) {
@@ -195,6 +195,14 @@ function changeImage(evt) {
         } else {
             evt.target.src = evt.target.src.replace('whole', 'whole_active');
             updatePizza(evt.target, 'whole',true);
+
+            // Deselects the LEFT and RIGHT select buttons
+            for (let i = 2; i < evt.target.parentElement.children.length; i++) {
+
+                const element = evt.target.parentElement.children[i];
+                element.src = element.src.replace("_active", "");
+
+            }
         }
 
     } else if (/right/.test(evt.target.src)) {
