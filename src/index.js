@@ -187,6 +187,13 @@ function deletesToppingFromPizza(topping_name, toppings_container, side_of_pizza
 }
 
 function changeSelectionImage(evt) {
+    // Gets the topping name  
+    let regex = /<strong>(.*)<\/strong>/;
+    let arr = regex.exec(evt.target.parentElement.children[0].innerHTML);
+    let topping_name = arr[1].replace(" ", "_");
+
+    let toppings_container = document.getElementById('mainPizzaToppings');
+
     if (/whole/.test(evt.target.src)) {
         
         if (/whole_active.png/.test(evt.target.src)) {
@@ -211,8 +218,29 @@ function changeSelectionImage(evt) {
             evt.target.src = evt.target.src.replace('right_active', 'right');
             updatePizza(evt.target, 'right', false);
         } else {
-            evt.target.src = evt.target.src.replace('right', 'right_active');
-            updatePizza(evt.target, 'right', true);
+            
+            // Checks if the WHOLE select option is selected
+            if (/_active/.test(evt.target.parentElement.children[1].src)) {
+
+                evt.target.parentElement.children[1].src = evt.target.parentElement.children[1].src.replace("_active", "");
+                
+                for (let i = toppings_container.children.length -1; i >= 0; i--) {
+                    let element = toppings_container.children[i];
+                    
+                    // Checks if the left LEFT image exist and deletes it
+                    if (new RegExp(`${topping_name}-Left`).test(element.src)) {
+                        element.remove();
+                    }
+                }
+
+                evt.target.src = evt.target.src.replace('right', 'right_active');
+
+            } else {
+                // If it does not see that WHOLE is selected then it will just add the right side
+                evt.target.src = evt.target.src.replace('right', 'right_active');
+                updatePizza(evt.target, 'right', true);
+            }
+
         }
 
     } else {
@@ -221,8 +249,28 @@ function changeSelectionImage(evt) {
             evt.target.src = evt.target.src.replace('left_active', 'left');
             updatePizza(evt.target, 'left', false);
         } else {
-            evt.target.src = evt.target.src.replace('left', 'left_active');
-            updatePizza(evt.target, 'left', true);
+            
+            // Checks if the WHOLE select option is selected
+            if (/_active/.test(evt.target.parentElement.children[1].src)) {
+                
+                evt.target.parentElement.children[1].src = evt.target.parentElement.children[1].src.replace("_active", "");
+                
+                for (let i = toppings_container.children.length -1; i >= 0; i--) {
+                    let element = toppings_container.children[i];
+                    
+                    // Checks if the left LEFT image exist and deletes it
+                    if (new RegExp(`${topping_name}-Right`).test(element.src)) {
+                        element.remove();
+                    }
+                }
+                
+                evt.target.src = evt.target.src.replace('left', 'left_active');
+                
+            } else {
+                // If it does not see that WHOLE is selected then it will just add the right side
+                evt.target.src = evt.target.src.replace('left', 'left_active');
+                updatePizza(evt.target, 'left', true);
+            }
         }
 
     }
