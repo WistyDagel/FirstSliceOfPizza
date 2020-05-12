@@ -129,6 +129,13 @@ function changeImage(evt) {
     }
 }
 
+// JEFF CODE
+
+let cart = {
+    pizzas: [],
+    total: 0.0
+};
+
 // DEPRECATED
 // TODO: populate select, create json map
 
