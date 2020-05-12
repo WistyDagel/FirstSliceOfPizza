@@ -8,7 +8,8 @@ document.getElementById('meat').addEventListener('change', selectOptions);
 document.getElementById('veg').addEventListener('change', selectOptions);
 
 function selectOptions(evt) {
-    let selected_item = document.getElementById(evt.target.id).value;
+    var selected_item = document.getElementById(evt.target.id).value;
+
     if (selected_item != 'default') {
         document.getElementById(`selected_${evt.target.id}`).innerHTML = `What you want for <strong>${selected_item}</strong> ?`
         document.getElementById(`${evt.target.id}_selection`).style.display = 'block';
@@ -95,10 +96,94 @@ function loopsThroughOverlayImages() {
     return elements_list;
 }
 
-function updatePizza(evt, item_name) {
-    // Gets the button image
-    // console.log(document.getElementById(`${evt.target.id}_whole`).src);
+function updatePizza(target, side_of_pizza, isClicked) {  
+    // Containter that holds all the pizza topping images
+    let toppings_container = document.getElementById('mainPizzaToppings');
 
+    // Gets the topping name  
+    let regex = /<strong>(.*)<\/strong>/;
+    let arr = regex.exec(target.parentElement.children[0].innerHTML);
+    let topping_name = arr[1].replace(" ", "_");
+
+    // Creates the img tag to be added or deleted
+    let img = document.createElement('img');
+    img.className = 'mainPizzaImage';
+
+    if (side_of_pizza == 'whole') {
+
+        // Checks if the button is ACTIVE or NOT ACTIVE
+        if (isClicked) {
+            // Because of a WHOLE pizza, this adds another img tag
+            let img2 = document.createElement('img');
+            img2.className = 'mainPizzaImage';
+
+            img.src = `./IMAGES/${topping_name}-Left.webp`;
+            img2.src = `./IMAGES/${topping_name}-Right.webp`;
+
+            // Adds img tags to the MAIN TOPPING PIZZA div
+            toppings_container.appendChild(img);
+            toppings_container.appendChild(img2);
+        } else {
+            // Deletes the img tag
+            deletesToppingFromPizza(topping_name, toppings_container,side_of_pizza);
+        }
+
+    } else if ( side_of_pizza == 'right') {
+
+        // Checks if the button is ACTIVE or NOT ACTIVE
+        if (isClicked) {
+            img.src = `./IMAGES/${topping_name}-${side_of_pizza.charAt(0).toUpperCase()}${side_of_pizza.slice(1)}.webp`;
+
+            toppings_container.appendChild(img);
+        } else {
+            // Deletes the img tag
+            deletesToppingFromPizza(topping_name, toppings_container,side_of_pizza);
+        }
+
+    } else {
+
+        // Checks if the button is ACTIVE or NOT ACTIVE
+        if (isClicked) {
+            img.src = `./IMAGES/${topping_name}-${side_of_pizza.charAt(0).toUpperCase()}${side_of_pizza.slice(1)}.webp`;
+
+            toppings_container.appendChild(img);
+        } else {
+            // Deletes the img tag
+            deletesToppingFromPizza(topping_name, toppings_container,side_of_pizza);
+        }
+
+    }
+}
+
+function deletesToppingFromPizza(topping_name, toppings_container, side_of_pizza) {
+    // Loops through the TOPPINGS div
+    for (let i = toppings_container.children.length - 1; i >= 0; i--) {
+        let element = toppings_container.children[i];
+
+        // Finds the tag with the correct topping
+        if (new RegExp(`${topping_name}`).test(element.src)) {
+
+            // Deletes tag with the correct topping
+            if (side_of_pizza == 'whole') {
+                
+                element.remove();
+
+            } else if (side_of_pizza == 'right') {
+                
+                if (/Right/.test(element.src)) {
+                    element.remove();
+                }
+
+            } else {
+
+                if (/Left/.test(element.src)) {
+                    element.remove();
+                }
+
+            }
+
+        }
+    }
 }
 
 function changeImage(evt) {
@@ -106,24 +191,30 @@ function changeImage(evt) {
         
         if (/whole_active.png/.test(evt.target.src)) {
             evt.target.src = evt.target.src.replace('whole_active', 'whole');
+            updatePizza(evt.target, 'whole',false);
         } else {
             evt.target.src = evt.target.src.replace('whole', 'whole_active');
+            updatePizza(evt.target, 'whole',true);
         }
 
     } else if (/right/.test(evt.target.src)) {
 
         if (/right_active.png/.test(evt.target.src)) {
             evt.target.src = evt.target.src.replace('right_active', 'right');
+            updatePizza(evt.target, 'right', false);
         } else {
             evt.target.src = evt.target.src.replace('right', 'right_active');
+            updatePizza(evt.target, 'right', true);
         }
 
     } else {
 
         if (/left_active.png/.test(evt.target.src)) {
             evt.target.src = evt.target.src.replace('left_active', 'left');
+            updatePizza(evt.target, 'left', false);
         } else {
             evt.target.src = evt.target.src.replace('left', 'left_active');
+            updatePizza(evt.target, 'left', true);
         }
 
     }
