@@ -6,10 +6,10 @@ export let data = {
         {"Extra Large": "xl"}
     ],
     prices: [
-        {"sm": "$7.00"},
-        {"md": "$9.00"},
-        {"lg": "$12.00"},
-        {"xl": "$15.00"}
+        {"sm": 7.0},
+        {"md": 9.0},
+        {"lg": 12.0},
+        {"xl": 15.0}
     ],
     prebuiltPizzas: [
         {"Pepperoni": {

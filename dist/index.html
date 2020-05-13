@@ -132,8 +132,15 @@
             <h2 id="pizza-builder">Build Your Own</h2>
             <div id="flex-container">
                 <div id="currentToppings">
-                    <h4>Current Pizza:</h4>
+                    <div class="row">
+                        <h4>Current Pizza:</h4>
+                        <h4 id="buildSize"></h4>
+                    </div>
                     <div id='allToppings'></div>
+                    <div class="row">
+                        <h4>Price: </h4>
+                        <h4 id="buildPrice"></h4>
+                    </div>
                 </div>
             </div>
             <div class='flex-container'>
@@ -146,10 +153,10 @@
                 <div id='sidebar'>
                     <h3>Sizes</h3>
                     <select id='size'>
-                        <option value="Small">Small - 12"</option>
-                        <option value="Medium">Medium - 14"</option>
-                        <option value="Large">Large - 16"</option>
-                        <option value="X-Large">X-Large - 18"</option>
+                        <option value="sm" selected>Small - 12"</option>
+                        <option value="md">Medium - 14"</option>
+                        <option value="lg">Large - 16"</option>
+                        <option value="xl">X-Large - 18"</option>
                     </select>
                     <h3>Meats</h3>
                     <select id='meat'>
@@ -181,6 +188,7 @@
                         <img class='selection_image' id='veg_right' src='./IMAGES/assets/right.png' />
                         <img class='selection_image' id='veg_left' src='./IMAGES/assets/left.png' />
                     </div>
+                    <button class="orderbtn" id="add-to-cart-btn">Add to Cart</button>
                 </div>
             </div>
             <br />

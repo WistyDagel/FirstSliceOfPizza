@@ -220,6 +220,9 @@ function updateToppingList() {
         }
 
     }
+
+    // Jeff method
+    updatePricing();
 }
 
 function deletesToppingFromPizza(topping_name, toppings_container, side_of_pizza) {
@@ -373,34 +376,104 @@ let cart = {
     total: 0.0
 };
 
-
-
-// DEPRECATED
-// TODO: populate select, create json map
-
-// Code for dynamically constructing elements
-const anchor = (_innerHTML, _href = "#") => {
-    let a = document.createElement('a');
-    a.innerHTML = _innerHTML;
-    a.href = _href;
-    return a;
+let updateCart = () => {
+    console.log(cart);
 }
-// insert anchors for each key in JSON
-const populateDropdown = (dropdown, pairs) => {
-    Array.prototype.forEach.call(pairs, pair => {
-        for (let k of Object.keys(pair)) {
-            dropdown.appendChild(anchor(k));
+
+let addPizzaToCart = pizza => {
+    cart.pizzas.push(pizza);
+    updateCart();
+}
+
+let cartBtn = document.getElementById('add-to-cart-btn');
+cartBtn.onclick = evt => {
+    let pizza = gatherPizza();
+    
+    calculatePizzaPrice(pizza);
+    addPizzaToCart(pizza);
+    
+    clearBuild();
+}
+
+let gatherPizza = () => {
+    let pizza = {};
+    
+    let size = document.getElementById('size');
+    size = size.options[size.selectedIndex].value;
+    pizza.size = size;
+    
+    pizza.toppings = []
+    let toppings = document.getElementById('allToppings').getElementsByTagName('p');
+    Array.prototype.forEach.call(toppings, topping => {
+        topping = topping.innerText;
+        pizza.toppings.push(topping);
+    });
+
+    return pizza;
+}
+
+let calculatePizzaPrice = pizza => {
+    // Price of selected size
+    let prices = data.prices;
+    Array.prototype.forEach.call(prices, price => {
+        for (let k of Object.keys(price)) {
+            if (k === pizza.size) {
+                pizza.sizePrice = price[k];
+            }
         }
     });
-}
-// End
 
-// Code for pulling pre-built pizzas from data.js
-let dropdown = document.getElementById('prebuilt-dropdown');
-let prebuilt = data.prebuiltPizzas;
-// populateDropdown(dropdown, prebuilt);
-// ... sizes from data.js
-dropdown = document.getElementById('size-dropdown');
-let sizes = data.sizes;
-// populateDropdown(dropdown, sizes);
-// End
+    // Is a 5+ topping deal?
+    pizza.deal = pizza.toppings.length == 5;
+
+    // Price of each topping (first and fifth are free)
+    let toppings = {};
+    for (let i = 0; i < pizza.toppings.length; i++) {
+        let price = (i == 0 || i == 4)? 0 : 1;
+        toppings[pizza.toppings[i]] = price;
+    }
+    pizza.toppings = toppings;
+
+    // Total Price (size + each topping)
+    pizza.totalPrice = pizza.sizePrice;
+    for (let [k,v] of Object.entries(pizza.toppings)) {
+        pizza.totalPrice += v;
+    }
+}
+
+// Resets the pizza building form
+let clearBuild = () => {
+    document.getElementById('buildSize').innerText = "";
+    document.getElementById('allToppings').innerHTML = "";
+    document.getElementById('buildPrice').innerText = "";
+
+    document.getElementById('size').value = 'sm';
+    document.getElementById('meat').value = 'default';
+    document.getElementById('veg').value = 'default';
+
+    document.getElementById('meat_selection').style.display = 'none';
+    document.getElementById('veg_selection').style.display = 'none';
+
+    document.getElementById('mainPizzaToppings').innerHTML = "";
+}
+
+let updateSizing = () => {
+    let sizeSelect = document.getElementById('size');
+    document.getElementById('buildSize').innerText = sizeSelect[sizeSelect.selectedIndex].innerText;
+    updatePricing();
+}
+
+let updatePricing = () => {
+    // Get price from generated pizza
+    let pizza = gatherPizza();
+    calculatePizzaPrice(pizza);
+    
+    document.getElementById('buildPrice').innerText = generateDollarAmount(pizza.totalPrice);
+}
+
+let generateDollarAmount = val => {
+    return `$${val.toFixed(2)}`;
+}
+
+document.getElementById('size').onchange = updateSizing;
+updateSizing();
