@@ -235,7 +235,7 @@ function updateToppingList() {
         string = `<strong>${arr[1].replace("_", " ").replace("-Right", "").replace("-Left", "")}</strong>`;
 
         if (!checkIfDuplicateInList(string)) {
-            p.innerHTML = string;
+            p.innerHTML = "- " + string;
 
             topping_list_div.appendChild(p);
         } else {
