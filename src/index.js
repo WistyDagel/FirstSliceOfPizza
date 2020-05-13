@@ -7,6 +7,9 @@ import { data } from './data';
 document.getElementById('meat').addEventListener('change', selectOptions);
 document.getElementById('veg').addEventListener('change', selectOptions);
 
+const default_color = '#008764';
+const active_color = '#da102e';
+
 let list = document.getElementsByClassName('orderbtn');
 for (let i = 1; i < list.length; i++) {
     const element = list[i];
@@ -16,6 +19,12 @@ for (let i = 1; i < list.length; i++) {
 
 function addSpecialtyPizza(evt) {
     let toppings_list = evt.target.parentElement.parentElement.children[1].children[1].children;
+
+    // Clears the topping list's content
+    let x = document.getElementById('mainPizzaToppings');
+    while (x.firstChild) {
+        x.removeChild(x.lastChild);
+    }
 
     for (let i = 0; i < toppings_list.length; i++) {
         const element = toppings_list[i];
@@ -83,6 +92,9 @@ function selectOptions(evt) {
         document.getElementById(`${evt.target.id}_right`).addEventListener('click', changeSelectionImage);
         document.getElementById(`${evt.target.id}_left`).addEventListener('click', changeSelectionImage);
 
+        // Defaults the color of the ADD EXTRA button
+        defaultExtraButton(evt.target.id, selected_item);
+
         // Adds event listener to the ADD EXTRAS button
         document.getElementById(`${evt.target.id}_button`).addEventListener('click', addExtraToppings);
     } else {
@@ -90,7 +102,33 @@ function selectOptions(evt) {
     }
 }
 
-function getsToppingList(evt) {
+function defaultExtraButton(name, selected_item) {
+    let toppings = getsToppingList();
+
+    let regex = /EXTRA/;
+
+    let button = document.getElementById(`${name}_button`);
+
+    if (toppings.length != 0) {
+        for (let i = 0; i < toppings.length; i++) {
+            const element = toppings[i];
+            
+            if (element.innerHTML.replace("- <strong>", "").replace("</strong>", "").replace("EXTRA ", "") == selected_item) {
+                if (regex.test(element.innerHTML)) {
+                    button.style.backgroundColor = active_color;
+                    break;
+                } else {
+                    button.style.backgroundColor = default_color;
+                    break;
+                }
+            } else {
+                button.style.backgroundColor = default_color;
+            }
+        }
+    }
+}
+
+function getsToppingList() {
     let list = document.getElementById('allToppings');
 
     let list2 = [];
@@ -104,11 +142,30 @@ function getsToppingList(evt) {
     return list2;
 }
 
-function addExtraToppings() {
+function addExtraToppings(evt) {
     let topping_list = getsToppingList();
-    console.log(topping_list);
+
+    let regex = /<strong>(.*)<\/strong>/;
+    let find_extra = /EXTRA/;
 
     // If the user clicks ADD EXTRA, it will add "EXTRA" to the string.
+    for (let i = 0; i < topping_list.length; i++) {
+        const element = topping_list[i];
+        
+        let arr = regex.exec(evt.target.parentElement.parentElement.children[0].innerHTML);
+
+        // Checks if there is already EXTRA in the list with that specific topping
+        if (element.innerHTML.replace("- <strong>", "").replace("</strong>", "") == arr[1]) {
+            element.innerHTML = `- <strong>EXTRA ${arr[1]}</strong>`;
+
+            // Changes the buttons colors
+            evt.target.parentElement.style.backgroundColor = active_color;
+        } else if (find_extra.test(element.innerHTML)) {
+            // Gets rid of the EXTRA tag and changes the button's color
+            element.innerHTML = `- <strong>${arr[1]}</strong>`;
+            evt.target.parentElement.style.backgroundColor = default_color;
+        }
+    }
 }
 
 function comparesSelectedItemWithPizza(item) {
@@ -236,15 +293,20 @@ function updateToppingList() {
     // Gets all the images that create the pizza
     let all_toppings_on_pizza = loopsThroughOverlayImages();
 
-    let checkIfWhole = 0;
     let regex = /IMAGES\/(.*).webp/;
+    let regex_extra = /EXTRA/;
 
     let string = "";
 
     let topping_list_div = document.getElementById('allToppings');
+
+    let extra_list = [];
     
     // Clears the topping list's content
     while (topping_list_div.firstChild) {
+        if (regex_extra.test(topping_list_div.lastChild.innerHTML)) {
+            extra_list.push(topping_list_div.lastChild.innerHTML);
+        }
         topping_list_div.removeChild(topping_list_div.lastChild);
     }
     
@@ -254,12 +316,26 @@ function updateToppingList() {
 
         const element = all_toppings_on_pizza[i];
         
-        // Adds the INNERHTML for the P tag and adds it to the toppings list
         let arr = regex.exec(element.src);
-        string = `<strong>${arr[1].replace("_", " ").replace("-Right", "").replace("-Left", "")}</strong>`;
+        // Adds the INNERHTML for the P tag and adds it to the toppings list
+        // Checks if the topping has extra stuff added
+        if (extra_list.length > 0) {
+            for (let x = 0; x < extra_list.length; x++) {
+                const element = extra_list[x];
+                
+                if (arr[1].replace("_", " ").replace("-Right", "").replace("-Left", "") == element.replace("- <strong>", "").replace("</strong>", "").replace("EXTRA ", "")) {
+                    string = element.replace("- ", "");
+                    break;
+                } else {
+                    string = `<strong>${arr[1].replace("_", " ").replace("-Right", "").replace("-Left", "")}</strong>`;
+                }
+            }
+        } else {
+            string = `<strong>${arr[1].replace("_", " ").replace("-Right", "").replace("-Left", "")}</strong>`;
+        }
 
         if (!checkIfDuplicateInList(string)) {
-            p.innerHTML = "- " + string;
+            p.innerHTML = `- ${string}`;
 
             topping_list_div.appendChild(p);
         } else {
@@ -315,6 +391,9 @@ function changeSelectionImage(evt) {
         
         if (/whole_active.png/.test(evt.target.src)) {
             evt.target.src = evt.target.src.replace('whole_active', 'whole');
+
+            evt.target.parentElement.children[1].style.backgroundColor = default_color;
+
             updatePizza(evt.target, 'whole',false);
         } else {
             evt.target.src = evt.target.src.replace('whole', 'whole_active');
@@ -333,6 +412,9 @@ function changeSelectionImage(evt) {
 
         if (/right_active.png/.test(evt.target.src)) {
             evt.target.src = evt.target.src.replace('right_active', 'right');
+
+            evt.target.parentElement.children[1].style.backgroundColor = default_color;
+
             updatePizza(evt.target, 'right', false);
         } else {
             
@@ -364,6 +446,9 @@ function changeSelectionImage(evt) {
 
         if (/left_active.png/.test(evt.target.src)) {
             evt.target.src = evt.target.src.replace('left_active', 'left');
+
+            evt.target.parentElement.children[1].style.backgroundColor = default_color;
+            
             updatePizza(evt.target, 'left', false);
         } else {
             
