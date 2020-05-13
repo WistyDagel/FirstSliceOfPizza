@@ -136,6 +136,8 @@ let cart = {
     total: 0.0
 };
 
+
+
 // DEPRECATED
 // TODO: populate select, create json map
 

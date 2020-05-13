@@ -226,7 +226,63 @@ select option {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
 }
-  
+
+//CART
+.row {
+    display: flex;
+    flex-direction: row;
+}
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+#cart {
+    @extend .col;
+
+    width: auto;
+    & > div {
+        width: 100%;
+    }
+
+    & > #pizzas {
+        @extend .col;
+        
+        & > div {
+            @extend .row;
+            align-items: center;
+            justify-content: space-between;
+
+            // & > *:not(:first-child) {
+            //     margin-left: 10px;
+            // }
+            // & > *:not(:last-child) {
+            //     margin-right: 10px;
+            // }
+
+            & p {
+                margin: 0;
+                height: 60px;
+                line-height: 60px;
+                font-size: 18pt;
+            }
+        }
+    }
+
+    & > #checkout {
+        @extend .row;
+        align-items: center;
+        justify-content: space-between;
+        
+        & h5 {
+            margin: 0;
+        }
+        & > h5 > i {
+            margin-right: 20px;
+        }
+    }
+}
+
 //ORDER BUTTON
 .orderbtn {
     background-color: $papa-red;
@@ -253,7 +309,7 @@ select option {
 .flex-card {
     display: flex;
 }
-  
+
 .flex-container > div {
     text-align: center;
     line-height: 75px;
