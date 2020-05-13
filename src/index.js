@@ -7,6 +7,29 @@ import { data } from './data';
 document.getElementById('meat').addEventListener('change', selectOptions);
 document.getElementById('veg').addEventListener('change', selectOptions);
 
+let list = document.getElementsByClassName('orderbtn');
+for (let i = 1; i < list.length; i++) {
+    const element = list[i];
+    
+    element.addEventListener('click', addSpecialtyPizza);
+}
+
+function addSpecialtyPizza(evt) {
+    let toppings_list = evt.target.parentElement.parentElement.children[1].children[1].children;
+
+    for (let i = 0; i < toppings_list.length; i++) {
+        const element = toppings_list[i];
+        
+        let img = document.createElement('img');
+        img.className = 'overlayImage';
+        img.src = element.src;
+
+        document.getElementById('mainPizzaToppings').appendChild(img);
+    }
+
+    updateToppingList();
+}
+
 function selectOptions(evt) {
     var selected_item = document.getElementById(evt.target.id).value;
 
@@ -268,10 +291,11 @@ function changeSelectionImage(evt) {
             updatePizza(evt.target, 'whole',false);
         } else {
             evt.target.src = evt.target.src.replace('whole', 'whole_active');
+            console.log(evt.target.src);
             updatePizza(evt.target, 'whole',true);
 
             // Deselects the LEFT and RIGHT select buttons
-            for (let i = 2; i < evt.target.parentElement.children.length; i++) {
+            for (let i = 3; i < evt.target.parentElement.children.length; i++) {
 
                 const element = evt.target.parentElement.children[i];
                 element.src = element.src.replace("_active", "");
@@ -287,9 +311,9 @@ function changeSelectionImage(evt) {
         } else {
             
             // Checks if the WHOLE select option is selected
-            if (/_active/.test(evt.target.parentElement.children[1].src)) {
+            if (/_active/.test(evt.target.parentElement.children[2].src)) {
 
-                evt.target.parentElement.children[1].src = evt.target.parentElement.children[1].src.replace("_active", "");
+                evt.target.parentElement.children[2].src = evt.target.parentElement.children[2].src.replace("_active", "");
                 
                 for (let i = toppings_container.children.length -1; i >= 0; i--) {
                     let element = toppings_container.children[i];
@@ -318,9 +342,9 @@ function changeSelectionImage(evt) {
         } else {
             
             // Checks if the WHOLE select option is selected
-            if (/_active/.test(evt.target.parentElement.children[1].src)) {
+            if (/_active/.test(evt.target.parentElement.children[2].src)) {
                 
-                evt.target.parentElement.children[1].src = evt.target.parentElement.children[1].src.replace("_active", "");
+                evt.target.parentElement.children[2].src = evt.target.parentElement.children[2].src.replace("_active", "");
                 
                 for (let i = toppings_container.children.length -1; i >= 0; i--) {
                     let element = toppings_container.children[i];
