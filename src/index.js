@@ -84,16 +84,32 @@ function comparesSelectedItemWithPizza(item) {
 
 function loopsThroughOverlayImages() {
     // Loops through the overlay image
-    let images = document.getElementsByClassName('mainPizzaImage');
+    let images = document.getElementById('mainPizzaToppings');
 
     let elements_list = [];
 
-    for (let i = 0; i < images.length; i++) {
-        const element = images[i];
+    for (let i = 0; i < images.children.length; i++) {
+        const element = images.children[i];
         elements_list.push(element);
     }
 
     return elements_list;
+}
+
+function checkPizzaIfToppingIsThere(src) {
+    let list = loopsThroughOverlayImages();
+    let isOnPizza = false;
+
+    for (let i = list.length - 1; i >= 1; i--) {
+        let element = list[i];
+
+        if (new RegExp(src).test(element.src)) {
+            isOnPizza = true;
+            break;
+        }
+    }
+
+    return isOnPizza;
 }
 
 function updatePizza(target, side_of_pizza, isClicked) {  
@@ -117,12 +133,24 @@ function updatePizza(target, side_of_pizza, isClicked) {
             let img2 = document.createElement('img');
             img2.className = 'mainPizzaImage';
 
-            img.src = `./IMAGES/${topping_name}-Left.webp`;
-            img2.src = `./IMAGES/${topping_name}-Right.webp`;
+            let src1 = `./IMAGES/${topping_name}-Left.webp`;
+            let src2 = `./IMAGES/${topping_name}-Right.webp`;
 
-            // Adds img tags to the MAIN TOPPING PIZZA div
-            toppings_container.appendChild(img);
-            toppings_container.appendChild(img2);
+            img.src = src1;
+            img2.src = src2;
+
+            if (!checkPizzaIfToppingIsThere(src1)) {
+                // Adds img tags to the MAIN TOPPING PIZZA div
+                toppings_container.appendChild(img);
+                if (!checkPizzaIfToppingIsThere(src2)) {
+                    toppings_container.appendChild(img2);
+                }
+            } else {
+                if (!checkPizzaIfToppingIsThere(src2)) {
+                    toppings_container.appendChild(img2);
+                }
+            }
+
         } else {
             // Deletes the img tag
             deletesToppingFromPizza(topping_name, toppings_container,side_of_pizza);
@@ -132,9 +160,11 @@ function updatePizza(target, side_of_pizza, isClicked) {
 
         // Checks if the button is ACTIVE or NOT ACTIVE
         if (isClicked) {
+            // Checks if the image is already on the pizza and returns false if not
             img.src = `./IMAGES/${topping_name}-${side_of_pizza.charAt(0).toUpperCase()}${side_of_pizza.slice(1)}.webp`;
-
+            
             toppings_container.appendChild(img);
+
         } else {
             // Deletes the img tag
             deletesToppingFromPizza(topping_name, toppings_container,side_of_pizza);
@@ -150,6 +180,43 @@ function updatePizza(target, side_of_pizza, isClicked) {
         } else {
             // Deletes the img tag
             deletesToppingFromPizza(topping_name, toppings_container,side_of_pizza);
+        }
+        
+    }
+}
+
+function updateToppingList() {
+    // Gets all the images that create the pizza
+    let all_toppings_on_pizza = loopsThroughOverlayImages();
+
+    let checkIfWhole = 0;
+    let regex = /IMAGES\/(.*).webp/;
+
+    let string = "";
+
+    let topping_list_div = document.getElementById('allToppings');
+    
+    // Clears the topping list's content
+    while (topping_list_div.firstChild) {
+        topping_list_div.removeChild(topping_list_div.lastChild);
+    }
+    
+    // Iterates over all the toppings on the pizza image
+    for (let i = all_toppings_on_pizza.length - 1; i >= 0; i--) {
+        let p = document.createElement('p');
+
+        const element = all_toppings_on_pizza[i];
+        
+        // Adds the INNERHTML for the P tag and adds it to the toppings list
+        let arr = regex.exec(element.src);
+        string = `<strong>${arr[1].replace("_", " ").replace("-Right", "").replace("-Left", "")}</strong>`;
+
+        if (!checkIfDuplicateInList(string)) {
+            p.innerHTML = string;
+
+            topping_list_div.appendChild(p);
+        } else {
+            p.remove();
         }
 
     }
@@ -274,6 +341,29 @@ function changeSelectionImage(evt) {
         }
 
     }
+
+    updateToppingList();
+}
+
+function checkIfDuplicateInList(string) {
+    let isDuplicate = false;
+    let regex = /<strong>(.*)<\/strong>/;
+    let topping_name = regex.exec(string);
+
+    // Checks if topping is a duplicate
+    let list = document.getElementById('allToppings');
+
+    for (let i = list.children.length - 1; i >= 0; i--) {
+        const element = list.children[i];
+        
+        let l = regex.exec(element.innerHTML);
+
+        if (topping_name[1] == l[1]) {
+            isDuplicate = true;
+        }
+    }
+
+    return isDuplicate;
 }
 
 // JEFF CODE
