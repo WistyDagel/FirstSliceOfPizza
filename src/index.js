@@ -82,9 +82,33 @@ function selectOptions(evt) {
         document.getElementById(`${evt.target.id}_whole`).addEventListener('click', changeSelectionImage);
         document.getElementById(`${evt.target.id}_right`).addEventListener('click', changeSelectionImage);
         document.getElementById(`${evt.target.id}_left`).addEventListener('click', changeSelectionImage);
+
+        // Adds event listener to the ADD EXTRAS button
+        document.getElementById(`${evt.target.id}_button`).addEventListener('click', addExtraToppings);
     } else {
         document.getElementById(`${evt.target.id}_selection`).style.display = 'none';
     }
+}
+
+function getsToppingList(evt) {
+    let list = document.getElementById('allToppings');
+
+    let list2 = [];
+
+    for (let i = 0; i < list.children.length; i++) {
+        const element = list.children[i];
+    
+        list2.push(element);
+    }
+
+    return list2;
+}
+
+function addExtraToppings() {
+    let topping_list = getsToppingList();
+    console.log(topping_list);
+
+    // If the user clicks ADD EXTRA, it will add "EXTRA" to the string.
 }
 
 function comparesSelectedItemWithPizza(item) {
@@ -294,7 +318,6 @@ function changeSelectionImage(evt) {
             updatePizza(evt.target, 'whole',false);
         } else {
             evt.target.src = evt.target.src.replace('whole', 'whole_active');
-            console.log(evt.target.src);
             updatePizza(evt.target, 'whole',true);
 
             // Deselects the LEFT and RIGHT select buttons
