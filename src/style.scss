@@ -232,6 +232,7 @@ select option {
     display: flex;
     flex-direction: row;
 }
+
 .col {
     display: flex;
     flex-direction: column;
@@ -373,6 +374,7 @@ select option {
 
 #price {
     color: $papa-red;
+    margin: 0;
 }
 
 .selection_image {
