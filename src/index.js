@@ -508,6 +508,11 @@ let cart = {
     total: 0.0
 };
 
+let clearCart = () => {
+    cart.pizzas = [];
+    updateCart();
+}
+
 let updateCart = () => {
     cart.total = 0;
     // if (cart.pizzas.length > 0) {
@@ -674,3 +679,9 @@ let generateDollarAmount = val => {
 
 document.getElementById('size').onchange = updateSizing;
 updateSizing();
+
+document.getElementById('order').addEventListener('click', evt => {
+    clearCart();
+    let thanks = document.getElementById('thanks');
+    thanks.innerText = "Thank you for your order!";
+});
