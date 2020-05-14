@@ -515,8 +515,6 @@ let clearCart = () => {
 
 let updateCart = () => {
     cart.total = 0;
-    // if (cart.pizzas.length > 0) {
-    // }
     cart.pizzas.forEach(pizza => {
         cart.total += pizza.totalPrice;
     });
@@ -524,6 +522,9 @@ let updateCart = () => {
     let cartPrice = document.getElementById('cart-total');
     cartPrice.innerText = generateDollarAmount(cart.total);
     
+    let thanks = document.getElementById('thanks');
+    thanks.innerText = "";
+
     showCart();
 }
 
