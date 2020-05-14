@@ -510,6 +510,69 @@ let cart = {
 
 let updateCart = () => {
     console.log(cart);
+    cart.total = 0;
+    cart.pizzas.forEach(pizza => {
+        cart.total += pizza.totalPrice;
+    });
+    showCart();
+}
+
+let showCart = () => {
+    let cartDiv = document.getElementById("pizzas");
+    cartDiv.innerHTML = "";
+
+    cart.pizzas.forEach((pizza, i) => {
+        // Create HTML for pizza info
+        let pizzaDiv = document.createElement('div');
+        pizzaDiv.setAttribute('class', 'pizza');
+        cartDiv.appendChild(pizzaDiv);
+        
+        let pizzaLeft = document.createElement('div');
+        pizzaLeft.setAttribute('class', 'pizza-left');
+        pizzaDiv.appendChild(pizzaLeft);
+        
+        let pizzaRight = document.createElement('div');
+        pizzaRight.setAttribute('class', 'pizza-right');
+        pizzaDiv.appendChild(pizzaRight);
+
+        // Populate HTML with pizza info
+        // Left
+        let toppingStr = "";
+        
+        for (let [k,v] of Object.entries(pizza.toppings)) {
+            toppingStr += `${k}, `;
+        }
+        toppingStr = toppingStr.substr(0, toppingStr.length - 2);
+        
+        let leftP = document.createElement('p');
+        pizzaLeft.appendChild(leftP);
+        leftP.innerText = toppingStr;
+
+        // Right
+        let rightP = document.createElement('p');
+        pizzaRight.appendChild(rightP);
+        rightP.innerText = generateDollarAmount(pizza.totalPrice);
+
+        let span = document.createElement('span');
+        pizzaRight.appendChild(span);
+        span.setAttribute('id', i);
+        pizza.id = i;
+        span.innerHTML = '&times;';
+
+        span.onclick = evt => {
+            console.log(evt.target.id);
+            cart.pizzas.forEach((pizza, i) => {
+                if (i == evt.target.id) {
+                    cart.pizzas = cart.pizzas.slice(0, i).concat(cart.pizzas.slice(i + 1, cart.pizzas.length));
+                }
+            });
+            updateCart();
+        };
+
+        // Populate cart price with total
+        let cartPrice = document.getElementById('cart-total');
+        cartPrice.innerText = generateDollarAmount(cart.total);
+    });
 }
 
 let addPizzaToCart = pizza => {
@@ -518,6 +581,7 @@ let addPizzaToCart = pizza => {
 }
 
 let cartBtn = document.getElementById('add-to-cart-btn');
+cartBtn.removeEventListener('click', addSpecialtyPizza);
 cartBtn.onclick = evt => {
     let pizza = gatherPizza();
     
@@ -535,7 +599,8 @@ let gatherPizza = () => {
     pizza.size = size;
     
     pizza.toppings = []
-    let toppings = document.getElementById('allToppings').getElementsByTagName('p');
+    let toppings = document.getElementById('allToppings').querySelectorAll('p strong');
+
     Array.prototype.forEach.call(toppings, topping => {
         topping = topping.innerText;
         pizza.toppings.push(topping);
