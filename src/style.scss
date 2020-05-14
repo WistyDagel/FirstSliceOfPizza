@@ -413,6 +413,16 @@ select option {
     padding-right: 10px;
 }
 
+#meat_button, #veg_button{
+    font-size: 16pt;
+    border-radius: 4px;
+    width: auto;
+    margin-left: 30%;
+    margin-right: 30%;
+    min-width: 100px;
+    padding-bottom: 10px;
+}
+
 //FOOTER 
 .footer {
     width: 100%;
@@ -425,7 +435,7 @@ select option {
 }
 
 //MEDIA 
-@media all and (max-width: 500px) {
+@media all and (min-width: 500px) {
     // .flex-container {
     //     flex-direction: column;
     // }
@@ -437,6 +447,11 @@ select option {
         h5{
             font-size: 16pt;
         }
+    }
+    #meat_button, #veg_button{
+        font-size: 12pt;
+        margin-left: 20%;
+        margin-right: 20%;
     }
 }
 
@@ -451,6 +466,12 @@ select option {
     }
 }
 
+@media all and (min-width: 1200px) {
+    #meat_button, #veg_button{
+        font-size: 14pt;
+    }
+}
+
 @media all and (min-width: 1400px) {
     #pizzaImage{
         img{
@@ -461,6 +482,9 @@ select option {
     .container {
         margin-left: 125px;
         margin-right: 125px;
+    }
+    #meat_button, #veg_button{
+        font-size: 16pt;
     }
 }
 
@@ -473,6 +497,9 @@ select option {
     }
     #pizzaImage {
         padding-left: 8%;
+    }
+    #meat_button, #veg_button{
+        font-size: 18pt;
     }
 }
 
