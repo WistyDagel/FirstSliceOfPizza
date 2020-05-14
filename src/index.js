@@ -87,7 +87,7 @@ function selectOptions(evt) {
             e3.src = e3.src.replace("_active", "");
         }
 
-        // Adds HOVER and CLICK events for images
+        // Adds CLICK events for images
         document.getElementById(`${evt.target.id}_whole`).addEventListener('click', changeSelectionImage);
         document.getElementById(`${evt.target.id}_right`).addEventListener('click', changeSelectionImage);
         document.getElementById(`${evt.target.id}_left`).addEventListener('click', changeSelectionImage);
@@ -123,8 +123,11 @@ function defaultExtraButton(name, selected_item) {
                 }
             } else {
                 button.style.backgroundColor = default_color;
+                break;
             }
         }
+    } else {
+        button.style.backgroundColor = default_color;
     }
 }
 
@@ -157,12 +160,13 @@ function addExtraToppings(evt) {
         // Checks if there is already EXTRA in the list with that specific topping
         if (element.innerHTML.replace("- <strong>", "").replace("</strong>", "") == arr[1]) {
             element.innerHTML = `- <strong>EXTRA ${arr[1]}</strong>`;
-
+            
             // Changes the buttons colors
             evt.target.parentElement.style.backgroundColor = active_color;
-        } else if (find_extra.test(element.innerHTML)) {
+        } else if (find_extra.test(element.innerHTML) && element.innerHTML.replace("- <strong>", "").replace("</strong>", "") == arr[1]) {
             // Gets rid of the EXTRA tag and changes the button's color
             element.innerHTML = `- <strong>${arr[1]}</strong>`;
+            console.log(element.innerHTML);
             evt.target.parentElement.style.backgroundColor = default_color;
         }
     }
