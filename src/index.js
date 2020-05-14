@@ -509,11 +509,16 @@ let cart = {
 };
 
 let updateCart = () => {
-    console.log(cart);
     cart.total = 0;
+    // if (cart.pizzas.length > 0) {
+    // }
     cart.pizzas.forEach(pizza => {
         cart.total += pizza.totalPrice;
     });
+
+    let cartPrice = document.getElementById('cart-total');
+    cartPrice.innerText = generateDollarAmount(cart.total);
+    
     showCart();
 }
 
@@ -560,7 +565,6 @@ let showCart = () => {
         span.innerHTML = '&times;';
 
         span.onclick = evt => {
-            console.log(evt.target.id);
             cart.pizzas.forEach((pizza, i) => {
                 if (i == evt.target.id) {
                     cart.pizzas = cart.pizzas.slice(0, i).concat(cart.pizzas.slice(i + 1, cart.pizzas.length));
@@ -568,10 +572,6 @@ let showCart = () => {
             });
             updateCart();
         };
-
-        // Populate cart price with total
-        let cartPrice = document.getElementById('cart-total');
-        cartPrice.innerText = generateDollarAmount(cart.total);
     });
 }
 
