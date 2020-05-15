@@ -404,6 +404,7 @@ select option {
         background-color: darkgreen;
     }
 }
+
 #selected_veg {
     padding-left: 10px;
     padding-right: 10px;
@@ -416,9 +417,12 @@ select option {
 #meat_button, #veg_button{
     font-size: 16pt;
     border-radius: 4px;
+    cursor: pointer;
+    vertical-align:middle;
     width: auto;
     margin-left: 30%;
     margin-right: 30%;
+    
     min-width: 100px;
     padding-bottom: 10px;
 }
