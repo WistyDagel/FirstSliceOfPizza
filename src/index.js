@@ -581,9 +581,9 @@ let showCart = () => {
         // Left
         let toppingStr = "";
         
-        for (let [k,v] of Object.entries(pizza.toppings)) {
-            toppingStr += `${k}, `;
-        }
+        pizza.toppings.forEach(topping => {
+            toppingStr += `${topping}, `;
+        });
         toppingStr = toppingStr.substr(0, toppingStr.length - 2);
         
         let leftP = document.createElement('p');
@@ -614,6 +614,7 @@ let showCart = () => {
 
 let addPizzaToCart = pizza => {
     cart.pizzas.push(pizza);
+    console.log(cart);
     updateCart();
 }
 
@@ -662,13 +663,9 @@ let calculatePizzaPrice = pizza => {
     for (let i = 0; i < pizza.toppings.length; i++) {
         if (pizza.toppings[i].slice(0, 5) === "EXTRA") {
             let extra_topping = pizza.toppings[i].slice(6, pizza.toppings[i].length);
-            
-            console.log(pizza.toppings);
 
             pizza.toppings[i] = extra_topping;
             pizza.toppings.splice(i + 1, 0, extra_topping);
-            
-            console.log(pizza.toppings);
         }
     }
     
