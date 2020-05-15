@@ -26,6 +26,12 @@ function addSpecialtyPizza(evt) {
         x.removeChild(x.lastChild);
     }
 
+    // Clears the TOPPING LIST
+    let y = document.getElementById('allToppings');
+    while (y.firstChild) {
+        y.removeChild(y.lastChild);
+    }
+
     for (let i = 0; i < toppings_list.length; i++) {
         const element = toppings_list[i];
         
@@ -36,7 +42,18 @@ function addSpecialtyPizza(evt) {
         document.getElementById('mainPizzaToppings').appendChild(img);
     }
 
+    // Updates the TOPPINGS LIST with the new toppings
     updateToppingList();
+
+    // Defaults BOTH select boxes
+    let meat_select = document.getElementById('meat');
+    let veg_select = document.getElementById('veg');
+
+    meat_select.value = 'default';
+    veg_select.value = 'default';
+
+    document.getElementById('meat_selection').style.display = 'none';
+    document.getElementById('veg_selection').style.display = 'none';
 }
 
 function selectOptions(evt) {
@@ -123,7 +140,6 @@ function defaultExtraButton(name, selected_item) {
                 }
             } else {
                 button.style.backgroundColor = default_color;
-                break;
             }
         }
     } else {
@@ -163,10 +179,18 @@ function addExtraToppings(evt) {
             
             // Changes the buttons colors
             evt.target.parentElement.style.backgroundColor = active_color;
-        } else if (find_extra.test(element.innerHTML) && element.innerHTML.replace("- <strong>", "").replace("</strong>", "") == arr[1]) {
+            break;
+        } else if (find_extra.test(element.innerHTML)) {
             // Gets rid of the EXTRA tag and changes the button's color
-            element.innerHTML = `- <strong>${arr[1]}</strong>`;
-            console.log(element.innerHTML);
+            if (element.innerHTML.replace("- <strong>", "").replace("</strong>", "").replace("EXTRA ", "") == arr[1]) {
+
+                element.innerHTML = `- <strong>${arr[1]}</strong>`;
+                
+            } else {
+
+                element.innerHTML = `- <strong>${element.innerHTML.replace("- <strong>", "").replace("</strong>", "")}</strong>`;
+                console.log(element.innerHTML);
+            }
             evt.target.parentElement.style.backgroundColor = default_color;
         }
     }
