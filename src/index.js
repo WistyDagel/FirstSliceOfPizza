@@ -170,6 +170,9 @@ function addExtraToppings(evt) {
             evt.target.parentElement.style.backgroundColor = default_color;
         }
     }
+
+    // JEFF Method
+    updateSizing();
 }
 
 function comparesSelectedItemWithPizza(item) {
@@ -599,6 +602,7 @@ cartBtn.onclick = evt => {
     addPizzaToCart(pizza);
     
     clearBuild();
+    updateSizing();
 }
 
 let gatherPizza = () => {
@@ -630,21 +634,27 @@ let calculatePizzaPrice = pizza => {
         }
     });
 
-    // Is a 5+ topping deal?
-    pizza.deal = pizza.toppings.length == 5;
-
-    // Price of each topping (first and fifth are free)
-    let toppings = {};
+    // Split Extra toppings into two independent toppings
     for (let i = 0; i < pizza.toppings.length; i++) {
-        let price = (i == 0 || i == 4)? 0 : 1;
-        toppings[pizza.toppings[i]] = price;
-    }
-    pizza.toppings = toppings;
+        if (pizza.toppings[i].slice(0, 5) === "EXTRA") {
+            let extra_topping = pizza.toppings[i].slice(6, pizza.toppings[i].length);
+            
+            console.log(pizza.toppings);
 
+            pizza.toppings[i] = extra_topping;
+            pizza.toppings.splice(i + 1, 0, extra_topping);
+            
+            console.log(pizza.toppings);
+        }
+    }
+    
+    // Is a 5+ topping deal?
+    pizza.deal = pizza.toppings.length >= 5;
+    
     // Total Price (size + each topping)
     pizza.totalPrice = pizza.sizePrice;
-    for (let [k,v] of Object.entries(pizza.toppings)) {
-        pizza.totalPrice += v;
+    if (pizza.toppings.length > 0) {
+        pizza.totalPrice += (pizza.deal)? pizza.toppings.length - 2 : pizza.toppings.length - 1;
     }
 }
 
@@ -675,7 +685,7 @@ let updatePricing = () => {
     let pizza = gatherPizza();
     calculatePizzaPrice(pizza);
     
-    document.getElementById('buildPrice').innerText = generateDollarAmount(pizza.totalPrice);
+    document.getElementById('buildPrice').innerText = `${generateDollarAmount(pizza.totalPrice)}${(pizza.deal)? '  Special Deal!' : ''}`;
 }
 
 let generateDollarAmount = val => {
@@ -683,6 +693,10 @@ let generateDollarAmount = val => {
 }
 
 document.getElementById('size').onchange = updateSizing;
+
+// document.getElementById('meat_button').onclick = updateSizing;
+// document.getElementById('veg_button').onclick = updateSizing;
+
 updateSizing();
 
 document.getElementById('order').addEventListener('click', evt => {
