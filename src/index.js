@@ -2,7 +2,7 @@ import './style.scss';
 import { pizza_app } from './pizza';
 import { data } from './data';
 
-// document.getElementById('pizza').innerHTML = pizza_app;
+document.getElementById('pizza').innerHTML = pizza_app;
 
 document.getElementById('meat').addEventListener('change', selectOptions);
 document.getElementById('veg').addEventListener('change', selectOptions);
