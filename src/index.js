@@ -721,7 +721,9 @@ document.getElementById('size').onchange = updateSizing;
 updateSizing();
 
 document.getElementById('order').addEventListener('click', evt => {
-    clearCart();
-    let thanks = document.getElementById('thanks');
-    thanks.innerText = "Thank you for your order!";
+    if (cart.pizzas.length > 0) {
+        clearCart();
+        let thanks = document.getElementById('thanks');
+        thanks.innerText = "Thank you for your order!";
+    }
 });
