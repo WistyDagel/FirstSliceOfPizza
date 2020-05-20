@@ -579,16 +579,12 @@ let showCart = () => {
 
         // Populate HTML with pizza info
         // Left
-        let toppingStr = "";
-        
-        pizza.toppings.forEach(topping => {
-            toppingStr += `${topping}, `;
-        });
-        toppingStr = toppingStr.substr(0, toppingStr.length - 2);
+        console.log('getting name');
+        let name = getPizzaName(pizza);
         
         let leftP = document.createElement('p');
         pizzaLeft.appendChild(leftP);
-        leftP.innerText = toppingStr;
+        leftP.innerText = name;
 
         // Right
         let rightP = document.createElement('p');
@@ -610,6 +606,29 @@ let showCart = () => {
             updateCart();
         };
     });
+}
+
+let getPizzaName = pizza => {
+    let name = "";
+
+    // Get size
+    for(let i in data.sizes) {
+        let values = Object.entries(data.sizes[i]);
+        if (pizza.size === values[0][1]) {
+            name += `${values[0][0]} `;
+        }
+    }
+
+    if (pizza.toppings.length == 0) {
+        name += "Cheese";
+    } else {
+        pizza.toppings.forEach(topping => {
+            name += `${topping}, `;
+        });
+        name = name.substr(0, name.length - 2);
+    }
+
+    return name;
 }
 
 let addPizzaToCart = pizza => {
@@ -721,7 +740,9 @@ document.getElementById('size').onchange = updateSizing;
 updateSizing();
 
 document.getElementById('order').addEventListener('click', evt => {
-    clearCart();
-    let thanks = document.getElementById('thanks');
-    thanks.innerText = "Thank you for your order!";
+    if (cart.pizzas.length > 0) {
+        clearCart();
+        let thanks = document.getElementById('thanks');
+        thanks.innerText = "Thank you for your order!";
+    }
 });
