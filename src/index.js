@@ -2,7 +2,7 @@ import './style.scss';
 import { pizza_app } from './pizza';
 import { data } from './data';
 
-document.getElementById('pizza').innerHTML = pizza_app;
+// document.getElementById('pizza').innerHTML = pizza_app;
 
 document.getElementById('meat').addEventListener('change', selectOptions);
 document.getElementById('veg').addEventListener('change', selectOptions);
@@ -18,7 +18,7 @@ for (let i = 1; i < list.length; i++) {
 }
 
 function addSpecialtyPizza(evt) {
-    let toppings_list = evt.target.parentElement.parentElement.children[1].children[1].children;
+    let toppings_list = evt.target.parentElement.parentElement.parentElement.children[1].children[1].children;
 
     // Clears the topping list's content
     let x = document.getElementById('mainPizzaToppings');

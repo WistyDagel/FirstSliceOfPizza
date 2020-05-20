@@ -67,6 +67,7 @@ h4 {
 }
   
 h5 {
+    color: $papa-header;
     font-size: $font-size * .4;
 }
   
@@ -301,14 +302,21 @@ select option {
         margin-right: 20px;
     }
 }
+
 #buildSize,
 #buildPrice {
     margin-left: 16px
 }
 
+#selectPizza {
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
 //ORDER BUTTON
 .orderbtn {
-    background-color: $papa-red;
+    background-color: $papa-button;
     color: white;
     padding: 16px;
     font-size: 22px;
@@ -316,6 +324,10 @@ select option {
     width: 100%;
     max-width: 250px;
     border: none;
+    a {
+        color: white;
+        text-decoration: none;
+    }
 }
 
 #cardButton {
@@ -362,6 +374,9 @@ select option {
 
 #order{
     flex: 1;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
 }
 
 #currentToppings{
