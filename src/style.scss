@@ -206,9 +206,9 @@ select option {
     margin-bottom: 20px;
     width: 100%;
     -webkit-overflow-scrolling: touch;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    // &::-webkit-scrollbar {
+    //   display: inline;
+    // }
 }
 
 //CARDS
@@ -327,7 +327,7 @@ div#allToppings {
 
 #selectPizza {
     color: white;
-    font-size: 22px;
+    font-size: 100%;
     cursor: pointer;
 }
 
@@ -493,6 +493,12 @@ div#allToppings {
         font-size: 12pt;
         margin-left: 20%;
         margin-right: 20%;
+    }
+}
+
+@media all and (max-width: 600px) {
+    #selectPizza {
+        font-size: 80%;
     }
 }
 
