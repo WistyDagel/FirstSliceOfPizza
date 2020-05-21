@@ -579,7 +579,6 @@ let showCart = () => {
 
         // Populate HTML with pizza info
         // Left
-        console.log('getting name');
         let name = getPizzaName(pizza);
         
         let leftP = document.createElement('p');
@@ -619,6 +618,7 @@ let getPizzaName = pizza => {
         }
     }
 
+    // Get toppings
     if (pizza.toppings.length == 0) {
         name += "Cheese";
     } else {
