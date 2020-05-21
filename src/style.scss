@@ -305,7 +305,7 @@ select option {
 
 div#currentToppings,
 div#price {
-    & h4 {
+    & h6 {
         margin-top: 10px;
         margin-bottom: 10px;
         height: 40px;
@@ -317,6 +317,8 @@ div#allToppings {
         height: 30px;
         line-height: 30px;
         font-size: 30px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 }
 
@@ -369,10 +371,15 @@ div#allToppings {
 }
 
 #pizzaImage {
-    img{
+    & img {
         // width: 500px;
         // max-width: 80%;
         max-width: 40vw;
+    }
+    
+    & .imageWrapper {
+        min-height: 25vw;
+        margin-bottom: 20px;
     }
     // height: auto;
     // min-height: 325px;
@@ -407,11 +414,23 @@ div#allToppings {
     p {
         color: grey;
     }
+    & h5 {
+        margin: {
+            top: 0;
+            bottom: 0;
+        }
+    }
 }
 
 #price {
     color: $papa-red;
     margin: 0;
+    & h5 {
+        margin: {
+            top: 0;
+            bottom: 0;
+        }
+    }
 }
 
 .selection_image {
@@ -442,13 +461,12 @@ div#allToppings {
     }
 }
 
-#selected_veg {
-    padding-left: 10px;
-    padding-right: 10px;
-}
+#selected_veg,
 #selected_meat {
     padding-left: 10px;
     padding-right: 10px;
+    height: 25px;
+    line-height: 25px;
 }
 
 #meat_button, #veg_button{
