@@ -614,7 +614,7 @@ let getPizzaName = pizza => {
     for(let i in data.sizes) {
         let values = Object.entries(data.sizes[i]);
         if (pizza.size === values[0][1]) {
-            name += `${values[0][0]} `;
+            name += `${values[0][0]} - `;
         }
     }
 
