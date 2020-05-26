@@ -388,6 +388,27 @@ div#allToppings {
     // padding-bottom: 20%;
     padding-left: 5%;
     flex: 1.5;
+    strong {
+        font-size: 60%;
+    }
+    p {
+        font-size: 30%;
+    }
+    h4 {
+        font-size: 80%;
+    }
+    h5 {
+        font-size: 80%;
+    }
+    h6 {
+        font-size: 80%;
+    }
+}
+
+#allToppings {
+    p {
+        font-size: 12pt;
+    }
 }
 
 #sidebar {
@@ -461,6 +482,12 @@ div#allToppings {
     }
 }
 
+#add-to-cart-btn {
+    color: white;
+    font-size: 100%;
+    cursor: pointer;
+}
+
 #selected_veg,
 #selected_meat {
     padding-left: 10px;
@@ -514,9 +541,36 @@ div#allToppings {
     }
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 800px) {
     #selectPizza {
         font-size: 80%;
+    }
+    .scrolling-wrapper {
+        &::-webkit-scrollbar {
+          display: none;
+        }
+    }
+    
+    #pizzaImage {
+        strong {
+            font-size: 40%;
+        }
+        p {
+            font-size: 30%;
+        }
+        h4 {
+            font-size: 40%;
+        }
+        h5 {
+            font-size: 40%;
+        }
+        h6 {
+            font-size: 50%;
+        }
+    }
+
+    #selected_meat {
+        padding-bottom: 30px;
     }
 }
 
